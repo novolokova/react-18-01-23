@@ -1,9 +1,9 @@
 import { Component } from "react";
 import "./App.css";
-import CiaoSection from "./components/CiaoSection";
 
-// 19.01.23 ***********************************
-// function App() Refactor ---переписуємо на класс
+import UserSection from './components/UserSection';
+
+
 
 class App extends Component {
   // constructor(props) {
@@ -12,8 +12,10 @@ class App extends Component {
   // }
 
   render() {
-    return <CiaoSection />;
-  }
+    return <UserSection/>;
+
+  
+}
 }
 
 export default App;
