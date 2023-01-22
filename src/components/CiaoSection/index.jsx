@@ -1,6 +1,6 @@
 import { Component } from "react";
-import CiaoList from "../CiaoList";
-
+import CiaoList from "./CiaoList";
+import CiaoSorted from "./CiaoSorted";
 
 class CiaoSection extends Component {
   constructor(props) {
@@ -73,23 +73,20 @@ class CiaoSection extends Component {
       return isDirectionById ? current.id - next.id : next.id - current.id;
     });
     //записати відсортований масив у стан
-    // this.setState({users:users})
     this.setState({ users: usersCopy, isDirectionById: !isDirectionById });
   };
-  
+
   render() {
     const { users, isDirectionById, isDirectionByName } = this.state;
     return (
       <>
-        <p>
-          <button onClick={this.sortUsersById}>
-            sort by id {isDirectionById ? "right" : "revert"}
-          </button>
-          <button onClick={this.sortByName}>
-            sort by name {isDirectionByName ? "right" : "revert"}
-          </button>
-        </p>
-      <CiaoList users={users} />
+        <CiaoSorted
+          isDirectionById={isDirectionById}
+          isDirectionByName={isDirectionByName}
+          sortUsersById={this.sortUsersById}
+          sortByName={this.sortByName}
+        />
+        <CiaoList users={users} />
       </>
     );
   }
