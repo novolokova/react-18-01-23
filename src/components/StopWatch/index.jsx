@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import styles from './StopWatch.module.css'
+
 
 class StopWatch extends Component {
   constructor(props) {
@@ -39,7 +41,9 @@ class StopWatch extends Component {
     // для побочних ефектів
     // this.start();
   }
-  componentDidUpdate() {} // життя нашого
+  componentDidUpdate(
+    
+  ) {} // життя нашого
   componentWillUnmount() {
     //для очистки побочних ефектів
     this.stop();
@@ -49,13 +53,13 @@ class StopWatch extends Component {
     const { time } = this.state;
     // this.start();-not!!!
     return (
-      <div>
+      <article className={styles.container}>
         {/* <h2>count: {count}</h2> */}
-        <h2>time: {time.toLocaleTimeString("en-GB")}</h2>
+        <h2>{time.toLocaleTimeString("en-GB")}</h2>
         <button onClick={this.start}>start</button>
         <button onClick={this.stop}>stop</button>
         <button onClick={this.reset}>reset</button>
-      </div>
+      </article>
     );
   }
 }
