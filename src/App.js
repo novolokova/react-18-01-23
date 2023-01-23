@@ -1,15 +1,14 @@
-
 import "./App.css";
-import StopWatch from './components/StopWatch/index';
+import StopCountTimeout from "./components/StopCountTimeout/index";
+import StopWatchTimeout from "./components/StopWatchTimeout/index";
 
-
-
-
-function App () {
- 
-    return <StopWatch />;
-
-  
+function App() {
+  return (
+    <>
+      <StopCountTimeout/>
+      <StopWatchTimeout />
+    </>
+  );
 }
 
 export default App;

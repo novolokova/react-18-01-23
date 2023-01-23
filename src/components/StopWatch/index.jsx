@@ -9,7 +9,7 @@ class StopWatch extends Component {
       //   count: 0,
       time: new Date(0, 0, 0, 0, 0, 0, 0),
     };
-    // this.start();-not!!!
+    // this.start();-not!!! Warning
     this.intervalId = null;
   }
   tisk = () => {
@@ -17,7 +17,7 @@ class StopWatch extends Component {
     const newTime = new Date(time);
     newTime.setSeconds(newTime.getSeconds() + 1);
     this.setState({ time: newTime });
-    // this.setState((state, props) => { //- примусово впершу чургу, не завжди використовувати
+    // this.setState((state, props) => { //- примусово впершу чeргу, не завжди використовувати
     //     const { time } = this.state;
     //     const newTime = new Date(time);
     //     newTime.setSeconds(newTime.getSeconds() + 1);
@@ -38,20 +38,21 @@ class StopWatch extends Component {
     this.setState({ time: new Date(0, 0, 0, 0, 0, 0, 0) });
   };
   componentDidMount() {
-    // для побочних ефектів
+       // для побочних ефектів
     // this.start();
   }
-  componentDidUpdate(
-    
-  ) {} // життя нашого
+  componentDidUpdate() {
+    // console.log('componentDidUpdate')
+  } // життя нашого
   componentWillUnmount() {
     //для очистки побочних ефектів
     this.stop();
+    // console.log('componentWillUnmount')
   }
   render() {
     // const { count} = this.state;
     const { time } = this.state;
-    // this.start();-not!!!
+    // this.start();-not!!! recursion 
     return (
       <article className={styles.container}>
         {/* <h2>count: {count}</h2> */}
