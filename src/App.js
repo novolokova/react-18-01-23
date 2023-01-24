@@ -1,12 +1,11 @@
+import React from "react";
 import "./App.css";
-import StopCountTimeout from "./components/StopCountTimeout/index";
-import StopWatchTimeout from "./components/StopWatchTimeout/index";
+import SingInForm from "./components/form/SingInForm";
 
 function App() {
   return (
     <>
-      <StopCountTimeout/>
-      <StopWatchTimeout />
+      <SingInForm />
     </>
   );
 }
