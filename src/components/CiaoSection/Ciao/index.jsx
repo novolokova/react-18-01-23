@@ -1,6 +1,12 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 
 class Ciao extends Component {
+  /**
+   *
+   * @param {*} props
+   * @param {string} props.username
+   */
   constructor(props) {
     super(props);
     this.state = { isHi: true };
@@ -13,9 +19,8 @@ class Ciao extends Component {
     const { isHi } = this.state;
     const sayWord = isHi ? "Bye" : "Hi";
     const ciaoWord = isHi ? "Hi" : "Bye";
-    // if (isHi === false) { - може бути багато варіантів виводу render()
-    //   return <p>qwerty</p>
-    // }
+    // if (isHi === false) { - може бути багато варіантів виводу
+
     return (
       <h2>
         {ciaoWord} {username}!
@@ -24,4 +29,9 @@ class Ciao extends Component {
     );
   }
 }
+
+Ciao.propTypes = {
+  username: PropTypes.string.isRequired,
+};
+
 export default Ciao;

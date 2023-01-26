@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import cx from "classnames";
+import cx from "classnames"; // пшдключили бібліотеку
 import styles from "./SingInForm.module.css";
 
 const initialValues = {
@@ -18,8 +18,9 @@ class SingInForm extends Component {
   formHandler = (event) => {
     event.preventDefault();
     // console.dir(event.target.email.value);
-    event.target.reset();
-    this.setState({ ...initialValues });
+      console.dir(this.state);
+    event.target.reset(); // скидаємо данні у форми, візуально
+    this.setState({ ...initialValues });// встановлюємо початкові данні, начальні параметри
   };
 
   inputHandler = ({ target: { name, value } }) =>
