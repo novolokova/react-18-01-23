@@ -1,0 +1,43 @@
+// синхронне завантаження
+// @import './.././../common/styles/breakpoint';
+// @import './.././../common/styles/color';
+// @import './.././../common/styles/template';
+// @import './.././../common/styles/mixin';
+
+// асинхронне завантаження
+@use "src/common/styles/breakpoint" as breakpoint;
+@use "src/common/styles/color" as color;
+@use "src/common/styles/template" as *;
+@use "src/common/styles/mixin" as mixin;
+
+.container {
+  min-width: 300px;
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
+  padding: 1em;
+  background-color: teal;
+  color: white;
+  text-align: center;
+  > h2 {
+    font-size: 3em;
+  }
+  &__btn {
+    max-width: 100px;
+    @extend %one-line;
+    padding: 0.8em;
+    background-color: color.$main-color;
+    @include mixin.border-style(5px, white, solid);
+    &:not(&:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (min-width: breakpoint.$sm) {
+  .container{
+    background-color: palevioletred;
+  }
+ 
+}
+

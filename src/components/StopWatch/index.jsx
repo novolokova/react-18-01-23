@@ -1,32 +1,30 @@
 import React, { Component } from "react";
-import styles from './StopWatch.module.css'
-
+import { format, add, addSeconds } from "date-fns";
+import styles from "./StopWatch.module.scss";
 
 class StopWatch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //   count: 0,
       time: new Date(0, 0, 0, 0, 0, 0, 0),
     };
     // this.start();-not!!! Warning
     this.intervalId = null;
   }
-  tisk = () => {
-    const { time } = this.state;
-    const newTime = new Date(time);
-    newTime.setSeconds(newTime.getSeconds() + 1);
-    this.setState({ time: newTime });
-    // this.setState((state, props) => { //- примусово впершу чeргу, не завжди використовувати
-    //     const { time } = this.state;
-    //     const newTime = new Date(time);
-    //     newTime.setSeconds(newTime.getSeconds() + 1);
-    //   return { time: newTime };
-    // });
+  tick = () => {
+    this.setState((state, props) => {
+      // const { time } = state;
+      // const newTime = new Date(time);
+      // newTime.setSeconds(newTime.getSeconds() + 1);
+      // const newTime = addSeconds(time, 1)
+
+      // return { time: addSeconds(state.time, 1) };
+      return { time: add(state.time, { seconds: 1 }) };
+    });
   };
   start = () => {
     if (this.intervalId === null) {
-      this.intervalId = setInterval(this.tisk, 1000);
+      this.intervalId = setInterval(this.tick, 1000);
     }
   };
   stop = () => {
@@ -38,12 +36,12 @@ class StopWatch extends Component {
     this.setState({ time: new Date(0, 0, 0, 0, 0, 0, 0) });
   };
   componentDidMount() {
-       // для побочних ефектів
+    // для побочних ефектів
     // this.start();
   }
   componentDidUpdate() {
     // console.log('componentDidUpdate')
-  } // життя нашого
+  } // життя нашого Component
   componentWillUnmount() {
     //для очистки побочних ефектів
     this.stop();
@@ -52,14 +50,19 @@ class StopWatch extends Component {
   render() {
     // const { count} = this.state;
     const { time } = this.state;
-    // this.start();-not!!! recursion 
+    // this.start();-not!!! recursion
     return (
       <article className={styles.container}>
-        {/* <h2>count: {count}</h2> */}
-        <h2>{time.toLocaleTimeString("en-GB")}</h2>
-        <button onClick={this.start}>start</button>
-        <button onClick={this.stop}>stop</button>
-        <button onClick={this.reset}>reset</button>
+        <h2>{format(time, "HH:mm:ss")}</h2>
+        <button className={styles.container__btn} onClick={this.start}>
+          start
+        </button>
+        <button className={styles.container__btn} onClick={this.stop}>
+          stop stop stop stop stop
+        </button>
+        <button className={styles.container__btn} onClick={this.reset}>
+          reset
+        </button>
       </article>
     );
   }
