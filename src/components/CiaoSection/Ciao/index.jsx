@@ -1,5 +1,7 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
+import styles from "./Ciao.module.css";
+
 
 class Ciao extends Component {
   /**
@@ -17,21 +19,23 @@ class Ciao extends Component {
   render() {
     const { username } = this.props;
     const { isHi } = this.state;
-    const sayWord = isHi ? "Bye" : "Hi";
     const ciaoWord = isHi ? "Hi" : "Bye";
-    // if (isHi === false) { - може бути багато варіантів виводу
-
+    // if (typeof username !== "string") {
+    //   console.error("type must be string");
+    // }
     return (
-      <h2>
-        {ciaoWord} {username}!
-        <button onClick={this.handlerBtn}>Say {sayWord}</button>
-      </h2>
+      <article className={styles.container}>
+        <h2>
+          {ciaoWord}, {username}!
+          <button onClick={this.handlerBtn}>say {isHi ? "bye" : "hi"}</button>
+        </h2>
+      </article>
     );
   }
 }
 
 Ciao.propTypes = {
   username: PropTypes.string.isRequired,
-};
+}
 
 export default Ciao;

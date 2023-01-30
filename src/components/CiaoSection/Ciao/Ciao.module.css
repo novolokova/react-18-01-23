@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    padding: 20px;
+    background-color: rgb(209, 13, 45);
+    color: rgb(74, 19, 1);
+  
+    text-align: center;
+  }
+  .container > h2{
+    width: 100%;
+  }
