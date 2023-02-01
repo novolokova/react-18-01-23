@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import PropTypes from "prop-types";
 import {getUsers} from "./../../api"
+import Spinner from '../../Spinner';
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -46,16 +47,28 @@ class UsersLoader extends Component {
     this.load();
   }
   componentDidUpdate(prevProps, prevState) {
+    //щоб не було рекурсивного виклику треба умова
     if (prevState.currentPage !== this.state.currentPage) {
       this.load();
     }
   }
 
+mapUsers=({dender, name, nat, login})=>(
+  <article key={login.uuid}>
+  <h3>
+    {name.first} {name.last}
+    <p>nat: {nat} </p>
+    <p>dender: {dender}</p>
+  </h3>
+</article>
+)
+
+
   render() {
     const { users, error, isPanding, currentPage } = this.state;
 
     if (isPanding) {
-      return <div>Loading ...</div>;
+      return <Spinner/>;
     }
     if (error) {
       return <div>Error ...</div>;
@@ -68,13 +81,7 @@ class UsersLoader extends Component {
           <button onClick={this.nextPage}>&#9654;</button>
         </div>
         <h2>Users: </h2>
-        {users.map((user) => (
-          <article key={user.login.uuid}>
-            <h3>
-              {user.name.first} {user.name.last}
-            </h3>
-          </article>
-        ))}
+        {users.map(this.mapUsers)}  
       </section>
     );
   }
