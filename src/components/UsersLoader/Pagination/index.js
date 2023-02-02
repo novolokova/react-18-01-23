@@ -21,7 +21,7 @@ const Pagination = (props) => {
         </div>
     );
 };
-
+// винести &#9654;  ... 
 
 Pagination.propTypes = {
 currentPage: PropTypes.number.isRequired,

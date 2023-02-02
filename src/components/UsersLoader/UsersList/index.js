@@ -1,60 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import { resultsOptions } from "../../../configs";
 
 /**
- * 
- * @param {*} props 
- * @param {string} props.currentResults 
+ *
+ * @param {*} props
+ * @param {string} props.currentResults
  * @param {function} props.resultHandler
- * @returns 
+ * @returns
  */
-function UsersList (props)  {
+function UsersList(props) {
+  const { currentResults, resultHandler } = props;
 
-    const { currentResults, resultHandler } = props;
+  const mapOptions = ({ amount }) => (
+    <label>
+      <input
+        onChange={resultHandler}
+        name="results"
+        type="radio"
+        value={amount}
+        checked={currentResults === amount}
+      />
+      {amount}
+    </label>
+  );
 
-    return (
-        <div>
-          
-          amount:
-          <label>
-            <input
-              onChange={resultHandler}
-              name="results"
-              type="radio"
-              value={3}
-              checked={currentResults === "3"}
-            />
-            3
-          </label>
-          <label>
-            <input
-              onChange={resultHandler}
-              name="results"
-              type="radio"
-              value={5}
-              checked={currentResults === "5"}
-            />
-            5
-          </label>
-          <label>
-            <input
-              onChange={resultHandler}
-              name="results"
-              type="radio"
-              value={7}
-              checked={currentResults === "7"}
-            />
-            7
-          </label>
-         
-        </div>
-    );
-};
+  return <div>{resultsOptions.map(mapOptions)}</div>;
+}
 
 UsersList.propTypes = {
-  currentResults:PropTypes.string.isRequired,
-  resultHandler:PropTypes.func,
+  currentResults: PropTypes.string,
+  resultHandler: PropTypes.func,
 };
-
 
 export default UsersList;

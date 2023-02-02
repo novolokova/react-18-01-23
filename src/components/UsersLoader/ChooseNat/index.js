@@ -25,8 +25,8 @@ const ChooseNat = (props) => {
 };
 
 ChooseNat.propTypes = {
-  currentNat: PropTypes.string.isRequired,
-  natHandler: PropTypes.func.isRequired,
+  currentNat: PropTypes.string,
+  natHandler: PropTypes.func,
 };
 //default
 

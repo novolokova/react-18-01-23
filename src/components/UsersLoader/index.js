@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
 import { getUsers } from "./../../api";
 import Spinner from "../Spinner";
 import Error from "../Error";
 import { apiConfig } from "../../configs";
 import Users from "./Users";
-import UsersList from './UsersList';
-import ChooseNat from './ChooseNat';
-import Pagination from './Pagination';
+import UsersList from "./UsersList";
+import ChooseNat from "./ChooseNat";
+import Pagination from "./Pagination";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -33,9 +32,13 @@ class UsersLoader extends Component {
     this.setState((state, props) => ({ currentPage: state.currentPage + 1 }));
 
   load = () => {
-    const { currentPage: page, currentResults: results, currentNat:nat} = this.state;
+    const {
+      currentPage: page,
+      currentResults: results,
+      currentNat: nat,
+    } = this.state;
     getUsers({ page, results, nat }) // винесли отримання сторонього ресурсу в окрему функцію. Повернувся promise
-    //  якщо fulfilled(data) то витягує данні та повертає через then данні, якщо помилка(promise у стані reject)обробляємо(error)
+      //  якщо fulfilled(data) то витягує данні та повертає через then данні, якщо помилка(promise у стані reject)обробляємо(error)
       .then((data) => {
         if (data.error) {
           return this.setState({
@@ -76,12 +79,13 @@ class UsersLoader extends Component {
   resultHandler = ({ target: { value } }) => {
     this.setState({ currentResults: value });
   };
-  natHandler = ({ target: { value } }) =>{
+  natHandler = ({ target: { value } }) => {
     this.setState({ currentNat: value });
-  }
+  };
 
   render() {
-    const { users, error, isPanding, currentPage, currentResults, currentNat } = this.state;
+    const { users, error, isPanding, currentPage, currentResults, currentNat } =
+      this.state;
 
     if (isPanding) {
       return <Spinner />;
@@ -92,28 +96,22 @@ class UsersLoader extends Component {
     }
     return (
       <section>
-
-        <Pagination currentPage={currentPage} prevPage={this.prevPage} nextPage={this.nextPage}/>
-      
-
-          <UsersList currentResults={currentResults} resultHandler={this.resultHandler}/>
-        
-
-
-<ChooseNat currentNat={currentNat} natHandler={this.natHandler}/>
-      
-        <Users users={users}/>
-
+        <Pagination
+          currentPage={currentPage}
+          prevPage={this.prevPage}
+          nextPage={this.nextPage}
+        />
+        <UsersList
+          currentResults={currentResults}
+          resultHandler={this.resultHandler}
+        />
+        <ChooseNat currentNat={currentNat} natHandler={this.natHandler} />
+        <Users users={users} />
       </section>
     );
   }
 }
 
-UsersLoader.propTypes = {};
 
 export default UsersLoader;
 
-
-// дз
-// винести статтю з юзером в окремий компонент
-// промапити масиви NATS та AMOUNTS для відповідних елементів
