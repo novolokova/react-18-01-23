@@ -1,8 +1,11 @@
 import React from "react";
+// import { redirect } from "react-router-dom";
 import styles from "./Error.module.scss";
 // import ImageWrapper from "../ImageWrapper";
 
 const Error = () => {
+  // const navigate = useNavigate();
+  // redirect('/')
   return (
     <div className={styles.container}>
     <img src="images/error.jpg" alt="error 404"/>

@@ -4,9 +4,7 @@ import Spinner from "../Spinner";
 import Error from "../Error";
 import { apiConfig } from "../../configs";
 import Users from "./Users";
-import UsersList from "./UsersList";
-import ChooseNat from "./ChooseNat";
-import Pagination from "./Pagination";
+import ControlPanel from "./ControlPanel";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -20,7 +18,7 @@ class UsersLoader extends Component {
       currentResults: String(apiConfig.DEFAULT_AMOUNT),
       currentNat: apiConfig.DEFAULT_NAT,
     };
-  }
+  };
 
   prevPage = () => {
     if (this.state.currentPage > 1) {
@@ -28,6 +26,7 @@ class UsersLoader extends Component {
       this.setState((state, props) => ({ currentPage: state.currentPage - 1 }));
     }
   };
+
   nextPage = () =>
     this.setState((state, props) => ({ currentPage: state.currentPage + 1 }));
 
@@ -64,7 +63,8 @@ class UsersLoader extends Component {
 
   componentDidMount() {
     this.load();
-  }
+  };
+
   componentDidUpdate(prevProps, prevState) {
     //щоб не було рекурсивного виклику треба умова, обов'язково
     // prevProps, prevState - парам-ри за замовчуван. парам-ри попереднього стану, ті які були до тих змін які привели до Update нашого стану
@@ -75,10 +75,12 @@ class UsersLoader extends Component {
     ) {
       this.load();
     }
-  }
+  };
+
   resultHandler = ({ target: { value } }) => {
     this.setState({ currentResults: value });
   };
+
   natHandler = ({ target: { value } }) => {
     this.setState({ currentNat: value });
   };
@@ -96,22 +98,19 @@ class UsersLoader extends Component {
     }
     return (
       <section>
-        <Pagination
+        <ControlPanel
           currentPage={currentPage}
           prevPage={this.prevPage}
           nextPage={this.nextPage}
-        />
-        <UsersList
           currentResults={currentResults}
           resultHandler={this.resultHandler}
+          currentNat={currentNat}
+          natHandler={this.natHandler}
         />
-        <ChooseNat currentNat={currentNat} natHandler={this.natHandler} />
         <Users users={users} />
       </section>
     );
   }
 }
 
-
 export default UsersLoader;
-

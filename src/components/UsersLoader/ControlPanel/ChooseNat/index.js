@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { natOptions } from "../../../configs";
+import { apiConfig, natOptions } from "../../../../configs";
 
 /**
  *
@@ -11,7 +11,7 @@ import { natOptions } from "../../../configs";
  */
 const ChooseNat = (props) => {
   const { currentNat, natHandler } = props;
-  
+
   const mapOptions = ({ label, value }) => (
     <option key={value} value={value}>
       {label}
@@ -28,6 +28,9 @@ ChooseNat.propTypes = {
   currentNat: PropTypes.string,
   natHandler: PropTypes.func,
 };
-//default
+ChooseNat.defaultProps = {
+  currentNat: apiConfig.DEFAULT_NAT,
+  natHandler: () => {},
+};
 
 export default ChooseNat;
