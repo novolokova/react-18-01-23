@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 /**
  *
@@ -9,13 +9,16 @@ import PropTypes from 'prop-types';
  */
 function Users(props) {
   const { users } = props;
-  const mapUsers = ({ gender, name, nat, login }) => (
+  
+  const mapUsers = ({ gender, name, nat, login, location, picture }) => (
     <article key={login.uuid}>
       <h3>
         {name.first} {name.last}
       </h3>
+      <img src={picture.thumbnail} alt="user" />
       <p>nat: {nat} </p>
       <p>gender: {gender}</p>
+      <p>city: {location.city}</p>
     </article>
   );
   return (
@@ -27,7 +30,7 @@ function Users(props) {
 }
 
 Users.propTypes = {
-  users:PropTypes.array,
+  users: PropTypes.array,
 };
 
 export default Users;

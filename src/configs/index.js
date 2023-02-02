@@ -4,5 +4,12 @@ export const apiConfig ={
     DEFAULT_AMOUNT: 5,
     DEFAULT_NAT: "gb",
     DEFAULT_FORMAT: 'json',
-    DEFAULT_INC_FIELD: 'gender,name,nat,login'
+    DEFAULT_INC_FIELD: 'gender,name,nat,login,location, picture'
 }
+export const natOptions = [
+    { label: "FR", value: "fr" },
+    { label: "GB", value: "gb" },
+    { label: "US", value: "us" },
+  ];
+
+

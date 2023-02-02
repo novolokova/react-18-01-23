@@ -5,6 +5,9 @@ import Spinner from "../Spinner";
 import Error from "../Error";
 import { apiConfig } from "../../configs";
 import Users from "./Users";
+import UsersList from './UsersList';
+import ChooseNat from './ChooseNat';
+import Pagination from './Pagination';
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -31,7 +34,8 @@ class UsersLoader extends Component {
 
   load = () => {
     const { currentPage: page, currentResults: results, currentNat:nat} = this.state;
-    getUsers({ page, results, nat }) // винесли отримання сторонього ресурсу в окрему функцію
+    getUsers({ page, results, nat }) // винесли отримання сторонього ресурсу в окрему функцію. Повернувся promise
+    //  якщо fulfilled(data) то витягує данні та повертає через then данні, якщо помилка(promise у стані reject)обробляємо(error)
       .then((data) => {
         if (data.error) {
           return this.setState({
@@ -59,7 +63,8 @@ class UsersLoader extends Component {
     this.load();
   }
   componentDidUpdate(prevProps, prevState) {
-    //щоб не було рекурсивного виклику треба умова
+    //щоб не було рекурсивного виклику треба умова, обов'язково
+    // prevProps, prevState - парам-ри за замовчуван. парам-ри попереднього стану, ті які були до тих змін які привели до Update нашого стану
     if (
       prevState.currentPage !== this.state.currentPage ||
       prevState.currentResults !== this.state.currentResults ||
@@ -68,18 +73,6 @@ class UsersLoader extends Component {
       this.load();
     }
   }
-
-  // mapUsers = ({ gender, name, nat, login }) => (
-  //   <article key={login.uuid}>
-  //     <h3>
-  //       {name.first} {name.last}
-  //     </h3>
-  //     <p>nat: {nat} </p>
-  //       <p>gender: {gender}</p>
-     
-  //   </article>
-  // );
-
   resultHandler = ({ target: { value } }) => {
     this.setState({ currentResults: value });
   };
@@ -99,54 +92,18 @@ class UsersLoader extends Component {
     }
     return (
       <section>
-        <div>
-          <button onClick={this.prevPage}>&#9664;</button>
-          <strong>{currentPage}</strong>
-          <button onClick={this.nextPage}>&#9654;</button>
-          <span> ******</span>
-          amount:
-          <label>
-            <input
-              onChange={this.resultHandler}
-              name="results"
-              type="radio"
-              value={3}
-              checked={currentResults === "3"}
-            />
-            3
-          </label>
-          <label>
-            <input
-              onChange={this.resultHandler}
-              name="results"
-              type="radio"
-              value={5}
-              checked={currentResults === "5"}
-            />
-            5
-          </label>
-          <label>
-            <input
-              onChange={this.resultHandler}
-              name="results"
-              type="radio"
-              value={7}
-              checked={currentResults === "7"}
-            />
-            7
-          </label>
-          <span> ******</span>
-<select name="nat" onChange={this.natHandler} value={currentNat}>
-<option value="fr">fr</option>
-<option value="gb">gb</option>
-<option value="us">us</option>
-</select>
 
-        </div>
+        <Pagination currentPage={currentPage} prevPage={this.prevPage} nextPage={this.nextPage}/>
+      
+
+          <UsersList currentResults={currentResults} resultHandler={this.resultHandler}/>
+        
+
+
+<ChooseNat currentNat={currentNat} natHandler={this.natHandler}/>
+      
         <Users users={users}/>
 
-        {/* <h2>Users: </h2> */}
-        {/* {users.map(this.mapUsers)} */}
       </section>
     );
   }
