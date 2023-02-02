@@ -1,3 +1,6 @@
+import queryString from "query-string";
+import { apiConfig } from "../configs";
+
 /**
  *
  * @param {*} options
@@ -7,25 +10,25 @@
  * @param {string} options.nat
  * @returns {Promise}
  */
-//
 export const getUsers = (options = {}) => {
   const defaultOptions = {
-    format: 'json',
+    format: apiConfig.DEFAULT_FORMAT,
     page: 1,
-    results: 5,
-    seed: "fm2022-2",
-    nat: "gb",
-    inc:'gender,name,nat,login'
+    results: apiConfig.DEFAULT_AMOUNT,
+    seed: apiConfig.API_KEY,
+    nat: apiConfig.DEFAULT_NAT,
+    inc: apiConfig.DEFAULT_INC_FIELD,
   };
   const readyOptions = {
     ...defaultOptions,
     ...options,
   };
-
-  const { page, results, seed, nat, format, inc } = readyOptions;
   return fetch(
-    `https://randomuser.me/api/?results=${results}&seed=${seed}&page=${page}&nat=${nat}`
+    `${apiConfig.API_URL}/?${queryString.stringify(readyOptions)}`
   ).then((res) => res.json());
 };
 
-// отримує url, виконує запит по адресі, якщо fulfilled(data) то витягує данні та повертає через then проміс, якщо помилка то поверне проміс у стані reject(error)
+// отримує url, виконує запит по адресі, та повертає через then проміс до нащої ф-ції  load
+
+//https://www.npmjs.com/package/query-string
+//queryString.stringify(***) -бібліотека

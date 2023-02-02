@@ -5,3 +5,13 @@
     style: $style;
     }
   }
+
+  @mixin container-style($width, $height, $padding, $margin, $b-color){
+    width: $width;
+    height: $height;
+    padding: $padding;
+    margin: $margin;
+    background-color: $b-color;
+  }
+
+ 

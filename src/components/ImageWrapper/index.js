@@ -4,9 +4,10 @@ import styles from "./ImageWrapper.module.scss";
 
 
 const ImageWrapper = (props) => {
-  const { children, height } = props;
+  const { children, height, width } = props;
   const inlineStyles = {
     height: height,
+    width: width,
   };
   return (
     <div style={inlineStyles} className={styles.wrapper}>
