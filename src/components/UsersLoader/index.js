@@ -5,6 +5,7 @@ import Error from "../Error";
 import { apiConfig } from "../../configs";
 import Users from "./Users";
 import ControlPanel from "./ControlPanel";
+import FlexContainer from "../FlexContainer/index";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class UsersLoader extends Component {
       currentResults: String(apiConfig.DEFAULT_AMOUNT),
       currentNat: apiConfig.DEFAULT_NAT,
     };
-  };
+  }
 
   prevPage = () => {
     if (this.state.currentPage > 1) {
@@ -37,7 +38,7 @@ class UsersLoader extends Component {
       currentNat: nat,
     } = this.state;
     getUsers({ page, results, nat }) // винесли отримання сторонього ресурсу в окрему функцію. Повернувся promise
-      //  якщо fulfilled(data) то витягує данні та повертає через then данні, якщо помилка(promise у стані reject)обробляємо(error)
+    // якщо fulfilled(data) то витягує данні та повертає через then данні, якщо помилка(promise у стані reject)обробляємо(error)
       .then((data) => {
         if (data.error) {
           return this.setState({
@@ -63,7 +64,7 @@ class UsersLoader extends Component {
 
   componentDidMount() {
     this.load();
-  };
+  }
 
   componentDidUpdate(prevProps, prevState) {
     //щоб не було рекурсивного виклику треба умова, обов'язково
@@ -75,7 +76,7 @@ class UsersLoader extends Component {
     ) {
       this.load();
     }
-  };
+  }
 
   resultHandler = ({ target: { value } }) => {
     this.setState({ currentResults: value });
@@ -86,9 +87,7 @@ class UsersLoader extends Component {
   };
 
   render() {
-    const { users, error, isPanding, currentPage, currentResults, currentNat } =
-      this.state;
-
+    const { users, error, isPanding, currentPage, currentResults, currentNat } = this.state;
     if (isPanding) {
       return <Spinner />;
     }
@@ -107,7 +106,14 @@ class UsersLoader extends Component {
           currentNat={currentNat}
           natHandler={this.natHandler}
         />
-        <Users users={users} />
+        <FlexContainer
+          jCont="center"
+          alingIt="center"
+          flexDir="row"
+          flexWr="wrap"
+        >
+          <Users users={users} />
+        </FlexContainer>
       </section>
     );
   }

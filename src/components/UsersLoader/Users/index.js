@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./Users.module.scss";
 
 /**
  *
@@ -9,9 +10,9 @@ import PropTypes from "prop-types";
  */
 function Users(props) {
   const { users } = props;
-  
+
   const mapUsers = ({ gender, name, nat, login, location, picture }) => (
-    <article key={login.uuid}>
+    <article key={login.uuid} className={styles.container}>
       <h3>
         {name.first} {name.last}
       </h3>
@@ -21,12 +22,7 @@ function Users(props) {
       <p>city: {location.city}</p>
     </article>
   );
-  return (
-    <div>
-      <h2>Users: </h2>
-      {users.map(mapUsers)}
-    </div>
-  );
+  return <>{users.map(mapUsers)}</>;
 }
 
 Users.propTypes = {

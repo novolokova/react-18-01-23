@@ -1,0 +1,11 @@
+@use "src/common/styles/mixin" as mixin;
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @include mixin.container-style(100%, null, 20px, 10px, rgb(236, 139, 155));
+  @include mixin.border-style(1px, black, solid);
+}

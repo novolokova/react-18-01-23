@@ -4,6 +4,7 @@ import { apiConfig } from "../../../configs";
 import Pagination from "./Pagination";
 import UsersList from "./UsersList";
 import ChooseNat from "./ChooseNat";
+import styles from './ControlPanel.module.scss'
 
 /**
  *
@@ -20,7 +21,7 @@ import ChooseNat from "./ChooseNat";
  */
 const ControlPanel = (props) => {
   return (
-    <div>
+    <div className={styles.container}>
       <Pagination
         currentPage={props.currentPage}
         prevPage={props.prevPage}
@@ -34,7 +35,6 @@ const ControlPanel = (props) => {
     </div>
   );
 };
-
 
 ControlPanel.propTypes = {
   currentPage: PropTypes.number,
