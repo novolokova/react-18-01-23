@@ -5,15 +5,17 @@ class WindowSize extends Component {
     super(props);
     this.state = {
       h: window.innerHeight,
-      w: window.innerHeight,
+      w: window.innerWidth,
     };
   }
   handlerSize = () => {
     this.setState({
       h: window.innerHeight,
-      w: window.innerHeight,
+      w: window.innerWidth,
     });
   };
+//   Подія resizeзапускається, коли перегляд документа (вікно) було змінено.
+// Однак resizeподії запускаються лише для window об’єкта (тобто повертаються document.defaultView). Лише обробники, зареєстровані на windowоб’єкті, отримуватимуть resizeподії.
   componentDidMount = () => {
     window.addEventListener("resize", this.handlerSize);
   };

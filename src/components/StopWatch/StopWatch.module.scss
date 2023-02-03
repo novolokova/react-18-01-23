@@ -7,8 +7,11 @@
 // асинхронне завантаження
 @use "src/common/styles/breakpoint" as breakpoint;
 @use "src/common/styles/color" as color;
-@use "src/common/styles/template" as *;
+// @use "src/common/styles/template" as *;
+@use "src/common/styles/template" as t;
 @use "src/common/styles/mixin" as mixin;
+
+// template замість % можна писати .
 
 .container {
   min-width: 300px;
@@ -24,7 +27,7 @@
   }
   &__btn {
     max-width: 100px;
-    @extend %one-line;
+    @extend .one-line;
     padding: 0.8em;
     background-color: color.$main-color;
     @include mixin.border-style(5px, white, solid);

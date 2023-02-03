@@ -1,20 +1,7 @@
 @use "src/common/styles/mixin" as mixin;
 
 .container {
-  // width: 170px;
-  // height: 300px;
-
-  // padding: 20px;
- 
-  // margin: 10px;
-
-  // background-color: rgb(236, 139, 155);
-
-
-  @include mixin.container-style(170px, 300px,  20px, 10px, rgb(236, 139, 155));
-
-
+  @include mixin.container-style(170px, 300px, 20px, 10px, rgb(236, 139, 155));
   @include mixin.border-style(1px, black, solid);
-
   text-align: center;
 }
