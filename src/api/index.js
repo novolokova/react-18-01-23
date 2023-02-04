@@ -27,8 +27,14 @@ export const getUsers = (options = {}) => {
     `${apiConfig.API_URL}/?${queryString.stringify(readyOptions)}`
   ).then((res) => res.json());
 };
-
-// отримує url, виконує запит по адресі, та повертає через then проміс до нащої ф-ції  load
+// отримує url(він у configs), виконує запит по адресі, та повертає через then проміс до нащої ф-ції  load
 
 //https://www.npmjs.com/package/query-string
 //queryString.stringify(***) -бібліотека
+
+
+export const loadUsers = () =>
+  fetch("/data/users.json").then((response) => response.json());
+
+export const loadPhones = () =>
+  fetch("/data/phones.json").then((response) => response.json());

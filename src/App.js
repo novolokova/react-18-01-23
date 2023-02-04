@@ -7,11 +7,14 @@ import {
   NavLink,
   Link,
 } from "react-router-dom";
+import Dashboard from './pages/Dashboard';
+import LoaderPage from './pages/LoaderPage';
 import WindowSize from "./components/WindowSize";
 import SingInForm from './components/form/SingInForm';
 import StopWatch from './components/StopWatch';
 import Error from './components/Error';
-import Dashboard from './pages/Dashboard';
+
+
 
 
 function App() {
@@ -26,9 +29,7 @@ function App() {
         <li><NavLink to='/stop-watch'>StopWatch</NavLink></li>
         <li><NavLink to='/dash-board'>Dashboard</NavLink>
           <ul>
-            <li><NavLink to='/dash-board/messages/'>messages</NavLink></li>
-            <li><NavLink to='/dash-board/tasks/'>tasks</NavLink> </li>
-            <li><NavLink to='/dash-board/users/'>users</NavLink> </li>
+            <li><NavLink to='/dash-board/loader/'>loader</NavLink> </li>
           </ul>
         </li>
       </ul>
@@ -38,9 +39,8 @@ function App() {
       <Route path="/sing-in" element={<SingInForm />}/>
       <Route path="/stop-watch" element={<StopWatch />}/>
         <Route path="/dash-board" element={<Dashboard />}>
-            <Route path="messages" element={<h2>messages, messages</h2>}/>
-            <Route path="tasks" element={<h2>tasks, tasks</h2>}/>
-            <Route path="users" element={<h2>users, users</h2>}/>
+      
+          <Route path="loader" element={<LoaderPage/>}/>
         </Route> 
       <Route path="*" element={<Error />}/>   
     </Routes>

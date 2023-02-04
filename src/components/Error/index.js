@@ -13,12 +13,12 @@ const Error = () => {
     // 1 варіант
 
     // <div className={styles.container}>
-    // <img src="images/error-404.jpg" alt="error 404"/>
+    // <img src="/images/error-404.jpg" alt="error 404"/>
     // </div>
 
     // 2 варіант
     <ImageWrapper width="100%">
-      <img src="images/error-404.jpg" alt="error 404" />
+      <img src="/images/error-404.jpg" alt="error 404" />
     </ImageWrapper>
   );
 };
