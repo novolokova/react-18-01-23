@@ -13,6 +13,7 @@ import WindowSize from "./components/WindowSize";
 import SingInForm from './components/form/SingInForm';
 import StopWatch from './components/StopWatch';
 import Error from './components/Error';
+import MouseTracker from './components/MouseTracker';
 
 
 
@@ -20,34 +21,35 @@ import Error from './components/Error';
 function App() {
   return (
 
-    <>
-    <BrowserRouter>
-    <nav>
-      <ul>
-        <li><NavLink to='/'>HOME</NavLink></li>
-        <li><NavLink to='/sing-in'>SingInForm</NavLink></li>
-        <li><NavLink to='/stop-watch'>StopWatch</NavLink></li>
-        <li><NavLink to='/dash-board'>Dashboard</NavLink>
-          <ul>
-            <li><NavLink to='/dash-board/loader/'>loader</NavLink> </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <Routes>
-      <Route path="/" element={<WindowSize/>}/>
-      <Route path="/sing-in" element={<SingInForm />}/>
-      <Route path="/stop-watch" element={<StopWatch />}/>
-        <Route path="/dash-board" element={<Dashboard />}>
+    <MouseTracker/>
+    // <>
+    // <BrowserRouter>
+    // <nav>
+    //   <ul>
+    //     <li><NavLink to='/'>HOME</NavLink></li>
+    //     <li><NavLink to='/sing-in'>SingInForm</NavLink></li>
+    //     <li><NavLink to='/stop-watch'>StopWatch</NavLink></li>
+    //     <li><NavLink to='/dash-board'>Dashboard</NavLink>
+    //       <ul>
+    //         <li><NavLink to='/dash-board/loader/'>loader</NavLink> </li>
+    //       </ul>
+    //     </li>
+    //   </ul>
+    // </nav>
+    // <Routes>
+    //   <Route path="/" element={<WindowSize/>}/>
+    //   <Route path="/sing-in" element={<SingInForm />}/>
+    //   <Route path="/stop-watch" element={<StopWatch />}/>
+    //     <Route path="/dash-board" element={<Dashboard />}>
       
-          <Route path="loader" element={<LoaderPage/>}/>
-        </Route> 
-      <Route path="*" element={<Error />}/>   
-    </Routes>
-    <footer>&copy; 2023</footer>
-    </BrowserRouter>
+    //       <Route path="loader" element={<LoaderPage/>}/>
+    //     </Route> 
+    //   <Route path="*" element={<Error />}/>   
+    // </Routes>
+    // <footer>&copy; 2023</footer>
+    // </BrowserRouter>
    
-    </>
+    // </>
   )}
 //*********************************************** */
     // МЕНЮ 
