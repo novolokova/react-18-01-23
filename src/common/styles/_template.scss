@@ -4,3 +4,13 @@
     text-overflow: ellipsis;
   }
 // template замість % можна писати .
+
+.light {
+  background-color: lightgrey;
+  color: grey;
+}
+
+.dark{
+  background-color: rgb(58, 56, 56);
+  color: rgb(238, 236, 236);
+}

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
+
 import Header from "./components/Header";
 import Parent from "./components/Parent";
-import { UserContext } from "./contexts";
+import { UserContext, ThemeContext } from "./contexts";
+import {CONSTANTS} from './constants'
+const {THEMES} = CONSTANTS;
 
 class App extends Component {
   constructor(props) {
@@ -13,15 +15,21 @@ class App extends Component {
         firstName: "Brad",
         lastName: "Pitt",
       },
+      theme: THEMES.LIGHT,
     };
   }
+setTheme = (theme)=>this.setState({theme});
+
   render() {
-    const { user } = this.state;
+    console.log(UserContext)
+    const { user, theme } = this.state;
     return (
+      <ThemeContext.Provider value={[theme, this.setTheme]}>
       <UserContext.Provider value={user}>
         <Header />
         <Parent />
       </UserContext.Provider>
+      </ThemeContext.Provider >
     );
   }
 }
