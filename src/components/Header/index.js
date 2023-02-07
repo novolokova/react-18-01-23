@@ -1,45 +1,53 @@
 import React, { Component } from "react";
-import {LightMode, Brightness4} from '@mui/icons-material'
-// import LightModeIcon from '@mui/icons-material/LightMode';
-// import Brightness4Icon from '@mui/icons-material/Brightness4';
+import { LightMode, Brightness4 } from "@mui/icons-material";
 import cx from "classnames";
-import { ThemeContext, UserContext } from "../../contexts";
 import styles from "./Header.module.scss";
 import { CONSTANTS } from "../../constants";
+import { WithTheme } from "../HOC";
+import {WithUser} from "../HOC";
 const { THEMES } = CONSTANTS;
 
+
 class Header extends Component {
+  handlerTheme = () => {
+    const { theme, setTheme} = this.props;
+    const newTheme = theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+    setTheme(newTheme);
+  };
+  
   render() {
+    const { theme, user } = this.props;
+    const classNames = cx(styles.header, {
+      [styles.light]: theme === THEMES.LIGHT,
+      [styles.dark]: theme === THEMES.DARK,
+    });
     return (
-      // Consumer в якості параметра приймає функцію, тільки всередені ф-ції можна отримати та застосувати тему
-      <ThemeContext.Consumer>
-        {([theme, setTheme]) => {
-          const classNames = cx(styles.header,{
-            [styles.light]: theme === THEMES.LIGHT,
-            [styles.dark]: theme === THEMES.DARK,
-          });
-          return (
-            <UserContext.Consumer>
-              {(user) => (
-                <header className={classNames}>
-                  <strong>hi, {user.firstName}</strong>
-                  <span
-                    onClick={() => {
-                      const newTheme =
-                        theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
-                      setTheme(newTheme);
-                    }}
-                  >
-                    {theme === THEMES.LIGHT ? <Brightness4/> :<LightMode/>}
-                  </span>
-                </header>
-              )}
-            </UserContext.Consumer>
-          );
-        }}
-      </ThemeContext.Consumer>
+      <header className={classNames}>
+        <strong>hi,{user.firstName}</strong>
+        <span className={styles.theme} onClick={this.handlerTheme}>
+          {theme === THEMES.LIGHT ? <Brightness4 /> : <LightMode />}
+        </span>
+      </header>
     );
   }
 }
+export default WithUser(WithTheme(Header)) ;
 
-export default Header;
+// const HeaderWithContext = () => {
+//   return (
+//     <ThemeContext.Consumer>
+//       {([theme, setTheme]) => <Header theme={theme} setTheme={setTheme} />}
+//     </ThemeContext.Consumer>
+//   );
+// };
+// const WithTheme = (InnerComponent) => (props) => {
+//   return (
+//     <ThemeContext.Consumer>
+//       {([theme, setTheme]) => (
+//         <InnerComponent theme={theme} setTheme={setTheme} />
+//       )}
+//     </ThemeContext.Consumer>
+//   );
+// };
+//const HeaderWithContext = WithTheme(Header);
+
