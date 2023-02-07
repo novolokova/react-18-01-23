@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import cx from "classnames"; // пшдключили бібліотеку
+import cx from "classnames"; // пiдключили бібліотеку
 import styles from "./SingInForm.module.css";
 
 const initialValues = {
