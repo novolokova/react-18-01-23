@@ -19,5 +19,5 @@ const InputWrapperWithValidate = (props) => {
       </label>
     );
 };
-
+// інший приклад з children and cx 
 export default InputWrapperWithValidate;

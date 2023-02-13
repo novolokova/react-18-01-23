@@ -1,5 +1,6 @@
 import React from "react";
-import LogInForm from "./components/form/LogInForm";
+// import LogInForm from "./components/form/LogInForm";
+import LearnHooks from './components/LearnHooks';
 
 
 
@@ -7,7 +8,7 @@ function App() {
  
   return (
     <>
-      <LogInForm />
+      <LearnHooks />
     </>
   );
 }
