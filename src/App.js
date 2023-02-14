@@ -1,21 +1,32 @@
-import React from "react";
-// import LogInForm from "./components/form/LogInForm";
-import LearnHooks from './components/LearnHooks';
-
-
+import React, { useState } from "react";
+// import LearnHooks from "./components/LearnHooks";
+import FuncStopWatch from './components/FuncStopWatch/index';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { UserContext } from './contexts/index';
+import UserProfile from './components/UserProfile/index';
+import FuncHeader from './components/FuncHeader/index';
 
 function App() {
- 
+  const [user, setUser] = useState({
+    id: 1,
+    name: "Brad Pitt",
+  });
   return (
-    <>
-      <LearnHooks />
-    </>
+    // <UserContext.Provider value={[user, setUser]}>
+    //   <BrowserRouter>
+    //   <FuncHeader>
+    //     <Routes>
+    //       <Route path="/" element={<UserProfile />} />
+    //     </Routes>
+    //     </FuncHeader>
+    //   </BrowserRouter>
+    // </UserContext.Provider>
+    <FuncStopWatch/>
   );
-}
+      }
 export default App;
-
+      
 // gr3at@3wdsG
-
 
 
 
