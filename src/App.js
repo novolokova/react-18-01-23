@@ -1,27 +1,32 @@
 import React, { useState } from "react";
-// import LearnHooks from "./components/LearnHooks";
-import FuncStopWatch from './components/FuncStopWatch/index';
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { UserContext } from './contexts/index';
-import UserProfile from './components/UserProfile/index';
-import FuncHeader from './components/FuncHeader/index';
+import { ThemeContext, UserContext } from './contexts';
+
+import FuncHeader from './components/FuncHeader';
+import { CONSTANTS } from "./constants"
+import HomePage from './pages/HomePage';
+const { THEMES } = CONSTANTS;
+
 
 function App() {
   const [user, setUser] = useState({
     id: 1,
     name: "Brad Pitt",
   });
+  const [theme, setTheme] = useState(THEMES.LIGHT);
   return (
-    // <UserContext.Provider value={[user, setUser]}>
-    //   <BrowserRouter>
-    //   <FuncHeader>
-    //     <Routes>
-    //       <Route path="/" element={<UserProfile />} />
-    //     </Routes>
-    //     </FuncHeader>
-    //   </BrowserRouter>
-    // </UserContext.Provider>
-    <FuncStopWatch/>
+    <ThemeContext.Provider value={[theme, setTheme]}>
+      <UserContext.Provider value={[user, setUser]}>
+        <BrowserRouter>
+          <FuncHeader />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
+    // <FuncStopWatch/>
   );
       }
 export default App;

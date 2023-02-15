@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { LightMode, Brightness4 } from "@mui/icons-material";
 import cx from "classnames";
 import styles from "./Header.module.scss";
-import { CONSTANTS } from "../../constants";
+
 import { WithTheme } from "../HOC";
 import {WithUser} from "../HOC";
+import { CONSTANTS } from "../../constants";
 const { THEMES } = CONSTANTS;
 
 
