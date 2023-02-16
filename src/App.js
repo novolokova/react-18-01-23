@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import FuncHeader from './components/FuncHeader';
 import HomePage from './pages/HomePage';
 import { ThemeContext, UserContext } from './contexts';
 import {useClicker} from './hooks';
 import { CONSTANTS } from "./constants"
+import SignUpForm from './components/form/SignUpForm/index';
 
 
 const { THEMES } = CONSTANTS;
@@ -24,8 +25,21 @@ function App() {
         <BrowserRouter>
           <FuncHeader />
           <h2> Count from our hook useClicker {count}</h2>
+<nav>
+  <ul>
+    <li>
+      <NavLink to='/'>Home</NavLink>
+    </li>
+    <li>
+      <NavLink to='signup'>Signup</NavLink>
+    </li>
+  </ul>
+</nav>
+
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="signup" element={<SignUpForm />} />
+
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
