@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeContext, UserContext } from './contexts';
-
 import FuncHeader from './components/FuncHeader';
-import { CONSTANTS } from "./constants"
 import HomePage from './pages/HomePage';
+import { ThemeContext, UserContext } from './contexts';
+import {useClicker} from './hooks';
+import { CONSTANTS } from "./constants"
+
+
 const { THEMES } = CONSTANTS;
 
 
@@ -15,11 +17,13 @@ function App() {
     name: "Brad Pitt",
   });
   const [theme, setTheme] = useState(THEMES.LIGHT);
+  const count = useClicker(1000);
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
       <UserContext.Provider value={[user, setUser]}>
         <BrowserRouter>
           <FuncHeader />
+          <h2> Count from our hook useClicker {count}</h2>
           <Routes>
             <Route path="/" element={<HomePage />} />
           </Routes>
