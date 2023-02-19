@@ -1,40 +1,15 @@
-import queryString from "query-string";
-import { apiConfig } from "../configs";
+// export { default as getUsers } from "./getUsers";
+// export { default as loadUsers } from "./loadUsers";
+// export { default as loadPhones } from "./loadPhones";
+// export { default as loadChat } from "./loadChat";
 
-/**
- *
- * @param {*} options
- * @param {number} options.currentPage
- * @param {number} options.results
- * @param {string} options.seed
- * @param {string} options.nat
- * @returns {Promise}
- */
-export const getUsers = (options = {}) => {
-  const defaultOptions = {
-    format: apiConfig.DEFAULT_FORMAT,
-    page: 1,
-    results: apiConfig.DEFAULT_AMOUNT,
-    seed: apiConfig.API_KEY,
-    nat: apiConfig.DEFAULT_NAT,
-    inc: apiConfig.DEFAULT_INC_FIELD,
-  };
-  const readyOptions = {
-    ...defaultOptions,
-    ...options,
-  };
-  return fetch(
-    `${apiConfig.API_URL}/?${queryString.stringify(readyOptions)}`
-  ).then((res) => res.json());
-};
-// отримує url(він у configs), виконує запит по адресі, та повертає через then проміс до нащої ф-ції  load
+// ЯКА РІЗНИЦЯ ЗАПИСУ ???
 
-//https://www.npmjs.com/package/query-string
-//queryString.stringify(***) -бібліотека
+import getUsers from "./getUsers";
+import loadUsers from "./loadUsers";
+import loadPhones from "./loadPhones";
+import loadChat from "./loadChat";
+
+export { getUsers, loadUsers, loadPhones, loadChat };
 
 
-export const loadUsers = () =>
-  fetch("/data/users.json").then((response) => response.json());
-
-export const loadPhones = () =>
-  fetch("/data/phones.json").then((response) => response.json());

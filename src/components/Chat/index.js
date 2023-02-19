@@ -1,50 +1,32 @@
 import React, { useReducer, useEffect } from "react";
+import { loadChat } from "../../api";
+import reducer from "./reducer";
+import TYPE_ACTIONS from './constants';
 
-// const store = ;
 
-const reduser = (state, action) => {
-   const{type, data:{messages, users}} = action;
-   switch (type) {
-    case 'DATA_RESPONSE_SUCCESS':{
-        const usersMap = new Map();
-        users.forEach((user) => usersMap.set(user.id, user));
-        // console.log(usersMap)
-            const messageWithAutor = messages.map((msg)=>{
-                const msgWithAutor = {
-                    ...msg,
-                    author: usersMap.get(msg.authorId)
-                }
-                return msgWithAutor
-            })
-        
-        const newState={
-            ...state,
-            users,
-            messages: messageWithAutor
-        };
-        return newState;
-    }
-    default:
-        return state;
-   }
-
-};
-
-const loadChat = () =>
-  fetch("/data/chat.json").then((response) => response.json());
 
 const Chat = () => {
-  const [state, dispatch] = useReducer(reduser, { messages: [], users: [] });
-  useEffect(() => {
-    loadChat().then((data) => {
-      const action = { data, type: "DATA_RESPONSE_SUCCESS" };
-      return dispatch(action);
-    });
-    // return () => {
-    //     cleanup
-    // };
-  }, []);
+  // в середені фун-го компоненту буде працювати тильки dispatch
+  const [state, dispatch] = useReducer(reducer, {
+    messages: [],
+    users: [],
+    error: null,
+    isPending: false,
+  });
 
+  useEffect(() => {
+    // в useEffect не потрібен return () => т.к. fetch і очищати нічого не потрібно
+    // loadChat().then((data) => {
+    //   const action = { data, type: "DATA_RESPONSE_SUCCESS" };
+    //   return dispatch(action);
+    // refector
+    loadChat()
+      .then((data) => dispatch({ data, type: TYPE_ACTIONS.DATA_RESPONSE_SUCCESS }))
+      .catch((error) => dispatch({ error, type: TYPE_ACTIONS.DATA_RESPONSE_ERROR }));
+  }, []);
+  if (state.error) {
+    return <div>404</div>;
+  }
   return (
     <section>
       <h2>Chat</h2>

@@ -1,64 +1,81 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
-import { ThemeContext, UserContext } from './contexts';
-import {useClicker} from './hooks';
-import FuncHeader from './components/FuncHeader';
-import SignUpForm from './components/form/SignUpForm';
-import Chat from './components/Chat';
-import HomePage from './pages/HomePage';
-
-
-import { CONSTANTS } from "./constants"
-
-
-
+import { MenuOpen } from "@mui/icons-material";
+import { ThemeContext, UserContext, MenuContext } from "./contexts";
+import { useClicker } from "./hooks";
+import FuncHeader from "./components/FuncHeader";
+import SignUpForm from "./components/form/SignUpForm";
+import Chat from "./components/Chat";
+import NavMenu from "./components/NavMenu";
+import HomePage from "./pages/HomePage";
+import { CONSTANTS } from "./constants";
 const { THEMES } = CONSTANTS;
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "MENU_OPEN": {
+      return { ...state, isMenuOpen: true };
+    }
+    case "MENU_CLOSE": {
+      return { ...state, isMenuOpen: false };
+    }
+    default:
+      return state;
+  }
+};
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, { isMenuOpen: false });
+
   const [user, setUser] = useState({
     id: 1,
     name: "Brad Pitt",
   });
   const [theme, setTheme] = useState(THEMES.LIGHT);
   const count = useClicker(1000);
+
+  const menuOpen = (event) => {
+    event.stopPropagation();
+    dispatch({ type: "MENU_OPEN" })};
+  const menuClose = () => dispatch({ type: "MENU_CLOSE" });
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
-      <UserContext.Provider value={[user, setUser]}>
-        <BrowserRouter>
-          <FuncHeader />
-          <h2> Count from our hook useClicker {count}</h2>
-<nav>
-  <ul>
-    <li>
-      <NavLink to='/'>Home</NavLink>
-    </li>
-    <li>
-      <NavLink to='signup'>Signup</NavLink>
-    </li>
-    <li>
-      <NavLink to='chat'>Chat</NavLink>
-    </li>
-  </ul>
-</nav>
+    <MenuContext.Provider value={[state, menuClose]}>
+      <ThemeContext.Provider value={[theme, setTheme]}>
+        <UserContext.Provider value={[user, setUser]}>
+          <BrowserRouter>
+            <MenuOpen onClick={menuOpen} />
+            <NavMenu />
+            <FuncHeader />
+            <h2> Count from our hook useClicker {count}</h2>
+            <nav>
+              <ul>
+                <li>
+                  <NavLink to="/">Home</NavLink>
+                </li>
+                <li>
+                  <NavLink to="signup">Signup</NavLink>
+                </li>
+                <li>
+                  <NavLink to="chat">Chat</NavLink>
+                </li>
+              </ul>
+            </nav>
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="signup" element={<SignUpForm />} />
-            <Route path="/chat" element={<Chat />} />
-
-          </Routes>
-        </BrowserRouter>
-      </UserContext.Provider>
-    </ThemeContext.Provider>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="signup" element={<SignUpForm />} />
+              <Route path="/chat" element={<Chat />} />
+            </Routes>
+          </BrowserRouter>
+        </UserContext.Provider>
+      </ThemeContext.Provider>
+    </MenuContext.Provider>
     // <FuncStopWatch/>
   );
-      }
+}
 export default App;
-      
+
 // gr3at@3wdsG
-
-
 
 //**************************************************************** */
 // <>
