@@ -7,10 +7,11 @@ import FuncHeader from "./components/FuncHeader";
 import SignUpForm from "./components/form/SignUpForm";
 import Chat from "./components/Chat";
 import NavMenu from "./components/NavMenu";
+import TodoReducer from './components/TodoReducer';
+import TodoUseState from './components/TodoUseState';
 import HomePage from "./pages/HomePage";
 import { CONSTANTS } from "./constants";
-import TodoReducer from './components/TodoReducer/index';
-import TodoUseState from './components/TodoUseState/index';
+
 const { THEMES } = CONSTANTS;
 
 const reducer = (state, action) => {

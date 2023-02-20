@@ -1,5 +1,6 @@
-// обійшли квадратичну складність
 import TYPE_ACTIONS from './constants';
+
+// обійшли квадратичну складність
 const reducer = (state, action) => {
   switch (action.type) {
     case TYPE_ACTIONS.DATA_RESPONSE_SUCCESS: {

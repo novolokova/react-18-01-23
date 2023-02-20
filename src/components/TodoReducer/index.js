@@ -2,7 +2,7 @@ import React from "react";
 import { useReducer } from "react";
 import { Formik, Form, Field } from "formik";
 import reducer from "./reducer";
-import {TASK_SCHEMA} from "../../utils/validationSchemas"
+import { TASK_SCHEMA } from "../../utils/validationSchemas";
 
 const TodoReducer = () => {
   const [state, dispatch] = useReducer(reducer, {
@@ -18,6 +18,7 @@ const TodoReducer = () => {
   const handlerIsDone = (id) => {
     dispatch({ type: "IS_DONE_TASK", payload: id });
   };
+  const selectValue = ({ target }) => target.value;
   const mapTasks = (task) => (
     <article key={task.id}>
       <p>
@@ -32,16 +33,40 @@ const TodoReducer = () => {
       </p>
     </article>
   );
+
+  // const options = [
+  //   { label: "All", value: "All" },
+  //   { label: "Do", value: "Do" },
+  //   { label: "Done", value: "Done" },
+  // ];
+
+  // const handleChange = ({ target }) => {
+  //   console.log(target.value);
+  // };
+
   return (
     <div>
       <section>
         <h3>New task</h3>
-        <Formik onSubmit={onSubmit} initialValues={{ body: "" }} validationSchema={TASK_SCHEMA}>
+        <Formik
+          onSubmit={onSubmit}
+          initialValues={{ body: "" }}
+          validationSchema={TASK_SCHEMA}
+        >
           <Form>
             <Field name="body" />
             <input type="submit" value="Add" />
           </Form>
         </Formik>
+      </section>
+      <section>
+        {/* <select value="value" onChange={handleChange}>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select> */}
       </section>
       <section>{state.tasks.map(mapTasks)}</section>
     </div>
