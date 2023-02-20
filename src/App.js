@@ -9,6 +9,8 @@ import Chat from "./components/Chat";
 import NavMenu from "./components/NavMenu";
 import HomePage from "./pages/HomePage";
 import { CONSTANTS } from "./constants";
+import TodoReducer from './components/TodoReducer/index';
+import TodoUseState from './components/TodoUseState/index';
 const { THEMES } = CONSTANTS;
 
 const reducer = (state, action) => {
@@ -47,24 +49,14 @@ function App() {
             <NavMenu />
             <FuncHeader />
             <h2> Count from our hook useClicker {count}</h2>
-            <nav>
-              <ul>
-                <li>
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="signup">Signup</NavLink>
-                </li>
-                <li>
-                  <NavLink to="chat">Chat</NavLink>
-                </li>
-              </ul>
-            </nav>
-
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="signup" element={<SignUpForm />} />
               <Route path="/chat" element={<Chat />} />
+
+              <Route path="todo-1" element={<TodoReducer />} />
+              <Route path="todo-2" element={<TodoUseState />} />
+
             </Routes>
           </BrowserRouter>
         </UserContext.Provider>

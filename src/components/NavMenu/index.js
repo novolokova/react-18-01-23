@@ -23,12 +23,19 @@ const NavMenu = () => {
     };
   }, [state.isMenuOpen]);
 
+  const keyCloseMenu = (event) => { //Accessibility
+    if (event.keyCode === 13) {
+      keyCloseMenu();
+    }
+  };
 
   return (
     <nav className={classNames} ref={navMenuRef}>
       <DisabledByDefaultOutlined
         className={styles.closeBtn}
         onClick={menuClose}
+        tabIndex="0"
+        onKeyDown={keyCloseMenu}
       />
       <ul>
         <li>
@@ -40,6 +47,14 @@ const NavMenu = () => {
         <li>
           <NavLink to="/chat">chat</NavLink>
         </li>
+
+        <li>
+          <NavLink to="/todo-1">Todo_Reducer</NavLink>
+        </li>
+        <li>
+          <NavLink to="/todo-2">Todo_UseState</NavLink>
+        </li>
+
       </ul>
     </nav>
   );

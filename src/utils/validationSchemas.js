@@ -1,5 +1,11 @@
  import * as Yup from "yup";
 
+ export const TASK_SCHEMA = Yup.object({body:
+ Yup.string()
+ .trim()
+ .min(4, "Must be more 4 letters")
+ .max(40, "Must be less 40 letters")
+ .required("Required!")});
 
  export const NAME_SCHEMA = Yup.string()
  .trim()
